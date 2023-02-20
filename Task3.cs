@@ -10,6 +10,7 @@ namespace ZadaniaMichal
 {
     internal class Task3
     {
+        int test = 0;
         /*
  * Lotto
  * a) Program losuje 6 unikalnych liczb z zakresu 1 do 49 wlacznie.
