@@ -14,17 +14,36 @@ Ile jest dziur od 1 do n.
 
     public class Task1
     {
-        public static void Perform_1()
+        public class Task1Result
         {
-            int[] data = new int[] { 6, 5, 3, 3, 8, 1 };
+            public int n;
+            public int numbersGreaterThan;
+            public int numbersOfGaps;
 
+            public Task1Result(int n, int numbersGreaterThan, int numbersOfGaps)
+            {
+                this.n = n;
+                this.numbersGreaterThan = numbersGreaterThan;
+                this.numbersOfGaps = numbersOfGaps;
+            }
+        }
+
+        public static Task1Result Perform_1(int[] data)
+        {
             int n = data[0];
 
             int numbersGreaterThan = CountGreaterThan(data, n);
             int numbersOfGaps = CountGaps(data, n);
+            return new Task1Result(n, numbersGreaterThan, numbersOfGaps);
+        }
 
-            Console.WriteLine("Numbers greater than: " + numbersGreaterThan);
-            Console.WriteLine("Numbers of gaps: " + numbersOfGaps);
+        public static void Perform_1()
+        {
+            int[] data = new int[] { 6, 5, 3, 3, 8, 1 };
+
+            Task1Result task1Result = Perform_1(data);
+            Console.WriteLine("Numbers greater than: " + task1Result.numbersGreaterThan);
+            Console.WriteLine("Numbers of gaps: " + task1Result.numbersOfGaps);
 
             Console.ReadLine();
         }
