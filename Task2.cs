@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using static ZadaniaMichal.Task1;
 
 namespace ZadaniaMichal
 {
@@ -32,27 +34,60 @@ namespace ZadaniaMichal
        i wyswietlic ta literke - znak. D
 
        */
+        public class Task2Result
+        {
+            public int[] convertToASCII;
+            public int countedOddNumber;
+            public int summarizedNumbersOnEvenIndex;
+            public int foundFirstAsciiNumber;
+            public char convertedAsciiNumber;
+
+            public Task2Result(int[] convertToASCII, 
+                               int countedOddNumber, 
+                               int summarizedNumbersOnEvenIndex,
+                               int foundFirstAsciiNumber,
+                               char convertedAsciiNumber)
+            {
+                this.convertToASCII = convertToASCII;
+                this.countedOddNumber = countedOddNumber;
+                this.summarizedNumbersOnEvenIndex = summarizedNumbersOnEvenIndex;
+                this.foundFirstAsciiNumber = foundFirstAsciiNumber;
+                this.convertedAsciiNumber = convertedAsciiNumber;
+            }
+        }
+
+        public static Task2Result Perform_2(string retrivedUserString)
+        {
+            int[] convertedUserStringInASCII = ConvertToASCII(retrivedUserString);
+
+            int countedOddNumber = CountOddNumber(convertedUserStringInASCII);
+
+            int summarizedNumbersOnEvenIndex = SumNumbersOnEvenIndex(convertedUserStringInASCII);
+
+            int foundFirstAsciiNumber = FindFirstAsciiNumber(summarizedNumbersOnEvenIndex);
+
+            char convertedAsciiNumber = ConvertFromAsciiNumbertoCharacter(foundFirstAsciiNumber);
+
+            return new Task2Result(convertedUserStringInASCII, countedOddNumber, summarizedNumbersOnEvenIndex, foundFirstAsciiNumber, convertedAsciiNumber);
+        }
 
         public static void Perform_2()
         {
             string retrivedUserString = RetrieveUserString();
-            int[] convertedUserStringInASCII = ConvertToASCII(retrivedUserString);
 
-            foreach (var item in convertedUserStringInASCII)
+            Task2Result task2Result =  Perform_2(retrivedUserString);
+         
+            foreach (var item in task2Result.convertToASCII)
             {
                 Console.WriteLine(item);
             }
 
-            int countedOddNumber = CountOddNumber(convertedUserStringInASCII);
-            Console.WriteLine("The counted odd numbers is: " + countedOddNumber);
+            Console.WriteLine("The counted odd numbers is: " + task2Result.countedOddNumber);
 
-            int summarizedNumbersOnEvenIndex = SumNumbersOnEvenIndex(convertedUserStringInASCII);
-            Console.WriteLine("The summarized numbers on even index is: " + summarizedNumbersOnEvenIndex);
+            Console.WriteLine("The summarized numbers on even index is: " + task2Result.summarizedNumbersOnEvenIndex);
 
-            int foundFirstAsciiNumber = FindFirstAsciiNumber(summarizedNumbersOnEvenIndex);
-            char convertedAsciiNumber = ConvertFromAsciiNumbertoCharacter(foundFirstAsciiNumber);
-            Console.WriteLine("Fond first Ascii number is: " + foundFirstAsciiNumber);
-            Console.WriteLine("Converted from Ascii number to character: " + convertedAsciiNumber);
+            Console.WriteLine("Fond first Ascii number is: " + task2Result.foundFirstAsciiNumber);
+            Console.WriteLine("Converted from Ascii number to character: " + task2Result.convertedAsciiNumber);
         }
 
         private static string RetrieveUserString()
