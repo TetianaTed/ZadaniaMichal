@@ -5,12 +5,10 @@ using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ZadaniaMichal.Task2;
-using System.Runtime.CompilerServices;
 
 namespace ZadaniaMichal
 {
-    internal class Task3
+    public class Task3
     {
         /*
  * Lotto
