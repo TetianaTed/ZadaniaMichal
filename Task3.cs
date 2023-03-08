@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ZadaniaMichal
 {
-    public class Task3
+    internal class Task3
     {
         /*
  * Lotto
@@ -21,55 +21,28 @@ namespace ZadaniaMichal
  *computer:  5 6 7 11 1 0
  *user:      2 6 9 3  1 11
  *hits:      3 - kolejnosc nie ma znaczenia
-
 bonus: liczba 49 ma byc paramatryzowana. Uzytkownik moze podac liczbe recznie.
  * 
 */
 
         //kolekcja typu zbior zapewnia unikalnosc
 
-        public class Task3Result
-        {           
-            public ISet<int> computerNumbers;
-            public ISet<int> userNumbers;
-            public int countedHits;
-
-            public Task3Result(ISet<int> computerNumbers,
-                               ISet<int> userNumbers,
-                               int countedHits)
-            {
-                this.computerNumbers = computerNumbers;
-                this.userNumbers = userNumbers;
-                this.countedHits = countedHits;
-            }
-        }
-
-        public static Task3Result Perform_3(int upperBound)
-        {
-            ISet<int> computerNumbers = RandomUniqueNumber(upperBound).ToImmutableSortedSet();
-
-            ISet<int> userNumbers = RetriveUserNumbers(upperBound).ToImmutableSortedSet();
-
-            int countedHits = CountHits(userNumbers, computerNumbers);
-
-            return new Task3Result(computerNumbers, userNumbers, countedHits);
-        }
-
         public static void Perform_3()
         {
             int upperBound = 10;
-
-            Task3Result task3Result = Perform_3(upperBound);
+            ISet<int> computerNumbers = RandomUniqueNumber(upperBound).ToImmutableSortedSet();
+            ISet<int> userNumbers = RetriveUserNumbers(upperBound).ToImmutableSortedSet();
 
             Console.WriteLine("\n");
 
             Console.Write("User numbers are: ");
-            PrintCollection(task3Result.userNumbers);
+            PrintCollection(userNumbers);
 
             Console.Write("Computer numbers are: ");
-            PrintCollection(task3Result.computerNumbers);
+            PrintCollection(computerNumbers);
 
-            Console.WriteLine("Hits: " + task3Result.countedHits);
+            int countedHits = CountHits(userNumbers, computerNumbers);
+            Console.WriteLine("Hits: " + countedHits);
         }
 
         private static ISet<int> RandomUniqueNumber(int upperBound)
@@ -79,7 +52,7 @@ bonus: liczba 49 ma byc paramatryzowana. Uzytkownik moze podac liczbe recznie.
 
             while (randomNumbers.Count < 6)
             {
-                randomNumbers.Add(rnd.Next(upperBound) + 1);                
+                randomNumbers.Add(rnd.Next(upperBound) + 1);
             }
 
             //PrintCollection(randomNumbers);
@@ -103,13 +76,13 @@ bonus: liczba 49 ma byc paramatryzowana. Uzytkownik moze podac liczbe recznie.
 
             while (userNumbers.Count < 6)
             {
-                Console.WriteLine("Please enter your value number: " + (userNumbers.Count+1));
+                Console.WriteLine("Please enter your value number: " + (userNumbers.Count + 1));
 
-                bool isSuccess = Int32.TryParse(Console.ReadLine(),out currentUserNumber);
+                bool isSuccess = Int32.TryParse(Console.ReadLine(), out currentUserNumber);
                 if (isSuccess && currentUserNumber > 0 && currentUserNumber <= upperBound)
                 {
                     userNumbers.Add(currentUserNumber);
-                }               
+                }
             }
             return userNumbers;
         }
@@ -118,7 +91,7 @@ bonus: liczba 49 ma byc paramatryzowana. Uzytkownik moze podac liczbe recznie.
         {
             int counter = 0;
 
-            foreach(int userNumber in userNumbers)
+            foreach (int userNumber in userNumbers)
             {
                 foreach (int computerNumber in computerNumbers)
                 {
