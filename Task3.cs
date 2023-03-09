@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ZadaniaMichal
 {
-    internal class Task3
+    public class Task3
     {
         /*
  * Lotto
@@ -27,22 +27,48 @@ bonus: liczba 49 ma byc paramatryzowana. Uzytkownik moze podac liczbe recznie.
 
         //kolekcja typu zbior zapewnia unikalnosc
 
+        public class Task3Result
+        {
+            public ISet<int> computerNumbers;
+            public ISet<int> userNumbers;
+            public int countedHits;
+
+            public Task3Result(ISet<int> computerNumbers,
+                               ISet<int> userNumbers,
+                               int countedHits)
+            {
+                this.computerNumbers = computerNumbers;
+                this.userNumbers = userNumbers;
+                this.countedHits = countedHits;
+            }
+        }
+
+        public static Task3Result Perform_3(int upperBound)
+        {
+            ISet<int> computerNumbers = RandomUniqueNumber(upperBound).ToImmutableSortedSet();
+
+            ISet<int> userNumbers = RetriveUserNumbers(upperBound).ToImmutableSortedSet();
+
+            int countedHits = CountHits(userNumbers, computerNumbers);
+
+            return new Task3Result(computerNumbers, userNumbers, countedHits);
+        }
+
         public static void Perform_3()
         {
             int upperBound = 10;
-            ISet<int> computerNumbers = RandomUniqueNumber(upperBound).ToImmutableSortedSet();
-            ISet<int> userNumbers = RetriveUserNumbers(upperBound).ToImmutableSortedSet();
+
+            Task3Result task3Result = Perform_3(upperBound);
 
             Console.WriteLine("\n");
 
             Console.Write("User numbers are: ");
-            PrintCollection(userNumbers);
+            PrintCollection(task3Result.userNumbers);
 
             Console.Write("Computer numbers are: ");
-            PrintCollection(computerNumbers);
+            PrintCollection(task3Result.computerNumbers);
 
-            int countedHits = CountHits(userNumbers, computerNumbers);
-            Console.WriteLine("Hits: " + countedHits);
+            Console.WriteLine("Hits: " + task3Result.countedHits);
         }
 
         private static ISet<int> RandomUniqueNumber(int upperBound)

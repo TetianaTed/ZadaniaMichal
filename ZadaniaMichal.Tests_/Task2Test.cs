@@ -44,13 +44,13 @@ namespace ZadaniaMichal.Tests
 
             //Assert
             //1.1 Assert.Equal
-            /*
+            
             Assert.Equal(expectedConvertToASCII, operationResult.convertToASCII);
             Assert.Equal(expectedCountedOddNumber, operationResult.countedOddNumber);
             Assert.Equal(expectedSummarizedNumbersOnEvenIndex, operationResult.summarizedNumbersOnEvenIndex);
             Assert.Equal(expectedFoundFirstAsciiNumber, operationResult.foundFirstAsciiNumber);
             Assert.Equal(expectedConvertedAsciiNumber, operationResult.convertedAsciiNumber);
-            */
+            
 
             //1.2 Fluent assertions
             operationResult.convertToASCII.Should().Equal(expectedConvertToASCII); //Should().Be not found
