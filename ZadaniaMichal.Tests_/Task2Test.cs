@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using static ZadaniaMichal.Task2;
+using FluentAssertions;
 
 namespace ZadaniaMichal.Tests
 {
@@ -42,11 +43,21 @@ namespace ZadaniaMichal.Tests
             ZadaniaMichal.Task2.Task2Result operationResult = ZadaniaMichal.Task2.Perform_2(givenUserString);
 
             //Assert
+            //1.1 Assert.Equal
+            /*
             Assert.Equal(expectedConvertToASCII, operationResult.convertToASCII);
             Assert.Equal(expectedCountedOddNumber, operationResult.countedOddNumber);
             Assert.Equal(expectedSummarizedNumbersOnEvenIndex, operationResult.summarizedNumbersOnEvenIndex);
             Assert.Equal(expectedFoundFirstAsciiNumber, operationResult.foundFirstAsciiNumber);
             Assert.Equal(expectedConvertedAsciiNumber, operationResult.convertedAsciiNumber);
+            */
+
+            //1.2 Fluent assertions
+            operationResult.convertToASCII.Should().Equal(expectedConvertToASCII); //Should().Be not found
+            operationResult.countedOddNumber.Should().Be(expectedCountedOddNumber);
+            operationResult.summarizedNumbersOnEvenIndex.Should().Be(expectedSummarizedNumbersOnEvenIndex);
+            operationResult.foundFirstAsciiNumber.Should().Be(expectedFoundFirstAsciiNumber);
+            operationResult.convertedAsciiNumber.Should().Be(expectedConvertedAsciiNumber);
         }
 
         //Separate asserts
